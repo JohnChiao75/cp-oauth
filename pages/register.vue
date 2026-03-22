@@ -64,8 +64,6 @@ const { t } = useI18n();
 useHead({ title: () => `${t('auth.register.title')} - CP OAuth` });
 const formRef = ref<FormInstance>();
 const loading = ref(false);
-const turnstileToken = ref('');
-const turnstileEl = ref<HTMLElement>();
 
 const form = reactive({
     username: '',
@@ -83,33 +81,7 @@ const { data: publicConfig } = await useFetch('/api/public/config');
 const siteTitle = computed(() => publicConfig.value?.siteTitle || t('app.name'));
 const turnstileEnabled = computed(() => publicConfig.value?.turnstileEnabled || false);
 const turnstileSiteKey = computed(() => publicConfig.value?.turnstileSiteKey || '');
-
-onMounted(() => {
-    if (turnstileEnabled.value && turnstileSiteKey.value) {
-        loadTurnstile();
-    }
-});
-
-function loadTurnstile() {
-    if (document.getElementById('cf-turnstile-script')) return;
-    const script = document.createElement('script');
-    script.id = 'cf-turnstile-script';
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    script.async = true;
-    script.onload = () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if (turnstileEl.value && (window as any).turnstile) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (window as any).turnstile.render(turnstileEl.value, {
-                sitekey: turnstileSiteKey.value,
-                callback: (token: string) => {
-                    turnstileToken.value = token;
-                }
-            });
-        }
-    };
-    document.head.appendChild(script);
-}
+const { token: turnstileToken, el: turnstileEl } = useTurnstile(turnstileSiteKey);
 
 async function handleRegister() {
     if (!formRef.value) return;
