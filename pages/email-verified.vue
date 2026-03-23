@@ -53,21 +53,21 @@ function closeTab() {
 <style scoped lang="scss">
 .verified-card {
     width: 100%;
-    max-width: 460px;
+    max-width: 420px;
     border: 1px solid var(--border-color);
 
     &__title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         color: var(--text-primary);
     }
 
     &__desc {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-secondary);
         line-height: 1.6;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
     }
 
     &__actions {
@@ -77,7 +77,7 @@ function closeTab() {
     }
 
     &__hint {
-        margin-top: 12px;
+        margin-top: 10px;
         font-size: 12px;
         color: var(--text-muted);
     }

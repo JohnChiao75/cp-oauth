@@ -2,7 +2,7 @@
     <div v-if="user" class="user-profile">
         <!-- Header -->
         <div class="user-profile__header">
-            <el-avatar :size="80" :src="user.avatarUrl || undefined" class="user-profile__avatar">
+            <el-avatar :size="72" :src="user.avatarUrl || undefined" class="user-profile__avatar">
                 {{ (user.displayName || user.username).charAt(0).toUpperCase() }}
             </el-avatar>
             <div class="user-profile__meta">
@@ -26,15 +26,16 @@
                     :key="account.platform"
                     class="user-profile__linked-item"
                 >
-                    <span class="user-profile__linked-platform">{{
-                        $t(`binding.platforms.${account.platform}`)
-                    }}</span>
+                    <span class="user-profile__linked-platform">
+                        <AppPlatformIcon :platform="account.platform" />
+                        <span>{{ $t(`binding.platforms.${account.platform}`) }}</span>
+                    </span>
                     <span class="user-profile__linked-uid">
                         {{ account.platformUsername || account.platformUid }}
                     </span>
                 </div>
             </div>
-            <el-empty v-else :description="$t('user.no_linked')" :image-size="60" />
+            <el-empty v-else :description="$t('user.no_linked')" :image-size="48" />
         </el-card>
 
         <el-card shadow="never" class="user-profile__section">
@@ -47,15 +48,16 @@
                     :key="account.platform"
                     class="user-profile__linked-item"
                 >
-                    <span class="user-profile__linked-platform">{{
-                        $t(`binding.platforms.${account.platform}`)
-                    }}</span>
+                    <span class="user-profile__linked-platform">
+                        <AppPlatformIcon :platform="account.platform" />
+                        <span>{{ $t(`binding.platforms.${account.platform}`) }}</span>
+                    </span>
                     <span class="user-profile__linked-uid">
                         {{ account.platformUsername || account.platformUid }}
                     </span>
                 </div>
             </div>
-            <el-empty v-else :description="$t('user.no_other_accounts')" :image-size="60" />
+            <el-empty v-else :description="$t('user.no_other_accounts')" :image-size="48" />
         </el-card>
 
         <!-- Homepage (Markdown) -->
@@ -129,8 +131,8 @@ await render();
 
     &__header {
         display: flex;
-        gap: 20px;
-        margin-bottom: 36px;
+        gap: 16px;
+        margin-bottom: 28px;
     }
 
     &__avatar {
@@ -138,7 +140,7 @@ await render();
         background: var(--bg-tertiary);
         color: var(--text-secondary);
         font-weight: 600;
-        font-size: 24px;
+        font-size: 22px;
     }
 
     &__meta {
@@ -146,44 +148,44 @@ await render();
     }
 
     &__name {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
         color: var(--text-primary);
         letter-spacing: -0.02em;
     }
 
     &__handle {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-muted);
         margin-top: 2px;
     }
 
     &__bio {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-secondary);
-        margin-top: 8px;
+        margin-top: 6px;
         line-height: 1.6;
     }
 
     &__joined {
         font-size: 12px;
         color: var(--text-muted);
-        margin-top: 8px;
+        margin-top: 6px;
     }
 
     &__section {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         border: 1px solid var(--border-color);
     }
 
     &__section-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         color: var(--text-primary);
     }
 
     &__loading-md {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-muted);
     }
 
@@ -195,7 +197,7 @@ await render();
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 8px 0;
+        padding: 7px 0;
 
         & + & {
             border-top: 1px solid var(--border-color);
@@ -203,6 +205,9 @@ await render();
     }
 
     &__linked-platform {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         font-size: 13px;
         font-weight: 600;
         color: var(--text-primary);
@@ -210,7 +215,7 @@ await render();
     }
 
     &__linked-uid {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--text-secondary);
     }
 
@@ -224,21 +229,21 @@ await render();
         :deep(h3) {
             font-weight: 600;
             color: var(--text-primary);
-            margin: 20px 0 8px;
+            margin: 18px 0 6px;
         }
 
         :deep(h1) {
-            font-size: 22px;
+            font-size: 20px;
         }
         :deep(h2) {
-            font-size: 18px;
+            font-size: 17px;
         }
         :deep(h3) {
-            font-size: 16px;
+            font-size: 15px;
         }
 
         :deep(p) {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         :deep(a) {
@@ -248,17 +253,17 @@ await render();
 
         :deep(code) {
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 13px;
+            font-size: 12px;
             background: var(--bg-tertiary);
-            padding: 2px 6px;
+            padding: 2px 5px;
             border-radius: 3px;
         }
 
         :deep(pre) {
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             overflow-x: auto;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
 
             code {
                 background: none;
@@ -267,26 +272,26 @@ await render();
         }
 
         :deep(.shiki) {
-            padding: 16px;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border-radius: 6px;
             overflow-x: auto;
         }
 
         :deep(ul),
         :deep(ol) {
-            padding-left: 20px;
-            margin-bottom: 12px;
+            padding-left: 18px;
+            margin-bottom: 10px;
         }
 
         :deep(li) {
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         :deep(blockquote) {
-            border-left: 3px solid var(--border-color);
-            padding-left: 16px;
+            border-left: 2px solid var(--border-color);
+            padding-left: 14px;
             color: var(--text-secondary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         :deep(img) {
@@ -297,18 +302,18 @@ await render();
         :deep(hr) {
             border: none;
             border-top: 1px solid var(--border-color);
-            margin: 20px 0;
+            margin: 18px 0;
         }
 
         :deep(table) {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
 
             th,
             td {
                 border: 1px solid var(--border-color);
-                padding: 8px 12px;
+                padding: 6px 10px;
                 text-align: left;
             }
 

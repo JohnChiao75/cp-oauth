@@ -166,12 +166,12 @@ await loadConfig();
 
 <style scoped lang="scss">
 .admin {
-    max-width: 600px;
+    max-width: 580px;
 
     &__title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         color: var(--text-primary);
     }
 
@@ -180,10 +180,10 @@ await loadConfig();
     }
 
     &__section-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         color: var(--text-primary);
-        margin: 20px 0 12px;
+        margin: 18px 0 10px;
         padding-bottom: 6px;
         border-bottom: 1px solid var(--border-color);
     }

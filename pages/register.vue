@@ -104,7 +104,7 @@
         <el-dialog
             v-model="luoguDialogVisible"
             :title="$t('auth.register.with_luogu')"
-            width="480px"
+            width="440px"
             :close-on-click-modal="false"
         >
             <div v-if="luoguRegisterStep === 1">
@@ -378,28 +378,28 @@ function copyLuoguCode() {
 <style scoped lang="scss">
 .login-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     border: 1px solid var(--border-color);
 
     &__brand {
-        font-size: 15px;
+        font-size: 13px;
         font-weight: 600;
-        color: var(--accent);
-        letter-spacing: -0.02em;
-        margin-bottom: 16px;
+        color: var(--text-muted);
+        letter-spacing: -0.01em;
+        margin-bottom: 14px;
     }
 
     &__title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         color: var(--text-primary);
     }
 
     &__turnstile {
         display: flex;
         justify-content: center;
-        margin: 4px 0 16px;
+        margin: 4px 0 14px;
     }
 
     &__btn {
@@ -407,7 +407,7 @@ function copyLuoguCode() {
     }
 
     &__oauth {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
 
         :deep(.el-button + .el-button) {
             margin-left: 0;
@@ -450,7 +450,7 @@ function copyLuoguCode() {
     }
 
     &__luogu-code {
-        padding: 10px 12px;
+        padding: 8px 12px;
         border: 1px solid var(--border-color);
         background: var(--bg-secondary);
         border-radius: 6px;
@@ -458,13 +458,13 @@ function copyLuoguCode() {
 
         code {
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
     }
 
     &__footer {
-        margin-top: 8px;
+        margin-top: 6px;
         text-align: center;
         font-size: 13px;
         color: var(--text-muted);

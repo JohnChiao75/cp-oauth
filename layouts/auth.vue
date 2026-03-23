@@ -15,7 +15,17 @@
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        background: var(--bg-primary);
+        background: var(--bg-secondary);
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-layout {
+        &__main {
+            padding: 24px 16px;
+            align-items: flex-start;
+            padding-top: 10vh;
+        }
     }
 }
 </style>

@@ -10,16 +10,16 @@
             <div class="consent__scopes">
                 <p class="consent__scopes-label">{{ $t('oauth.consent.permissions') }}</p>
                 <div v-for="scope in clientData.scopes" :key="scope" class="consent__scope-item">
-                    <Shield :size="16" />
+                    <Shield :size="15" :stroke-width="1.5" />
                     <span>{{ $t(`oauth.scopes.${scope.replace(':', '_')}`) }}</span>
                 </div>
             </div>
 
             <div class="consent__actions">
-                <el-button size="large" @click="handleDecision(false)">
+                <el-button @click="handleDecision(false)">
                     {{ $t('oauth.consent.deny') }}
                 </el-button>
-                <el-button type="primary" size="large" @click="handleDecision(true)">
+                <el-button type="primary" @click="handleDecision(true)">
                     {{ $t('oauth.consent.authorize') }}
                 </el-button>
             </div>
@@ -107,7 +107,7 @@ async function handleDecision(approved: boolean) {
 <style scoped lang="scss">
 .consent {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
 
     &__card {
         border: 1px solid var(--border-color);
@@ -118,16 +118,16 @@ async function handleDecision(approved: boolean) {
     }
 
     &__title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         color: var(--text-primary);
     }
 
     &__app {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-secondary);
-        margin-bottom: 24px;
+        margin-bottom: 20px;
 
         strong {
             color: var(--text-primary);
@@ -135,22 +135,22 @@ async function handleDecision(approved: boolean) {
     }
 
     &__scopes {
-        margin-bottom: 28px;
+        margin-bottom: 24px;
     }
 
     &__scopes-label {
-        font-size: 13px;
-        color: var(--text-secondary);
+        font-size: 12px;
+        color: var(--text-muted);
         font-weight: 500;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     &__scope-item {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 0;
-        font-size: 14px;
+        padding: 7px 0;
+        font-size: 13px;
         color: var(--text-primary);
         border-bottom: 1px solid var(--border-color);
 
@@ -161,7 +161,7 @@ async function handleDecision(approved: boolean) {
 
     &__actions {
         display: flex;
-        gap: 12px;
+        gap: 10px;
 
         .el-button {
             flex: 1;

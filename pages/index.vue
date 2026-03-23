@@ -23,7 +23,7 @@
                         :to="`/user/${u.username}`"
                         class="home__user-card"
                     >
-                        <el-avatar :size="44" :src="u.avatarUrl || undefined" class="home__avatar">
+                        <el-avatar :size="40" :src="u.avatarUrl || undefined" class="home__avatar">
                             {{ (u.displayName || u.username).charAt(0).toUpperCase() }}
                         </el-avatar>
                         <div class="home__user-info">
@@ -78,7 +78,7 @@ const quoteSource = computed(() => {
     max-width: 720px;
 
     &__title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
         color: var(--text-primary);
         letter-spacing: -0.02em;
@@ -87,15 +87,15 @@ const quoteSource = computed(() => {
     &__subtitle {
         color: var(--text-secondary);
         margin-top: 4px;
-        font-size: 15px;
-        margin-bottom: 40px;
+        font-size: 14px;
+        margin-bottom: 36px;
     }
 
     &__section-title {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
     &__section {
@@ -103,21 +103,21 @@ const quoteSource = computed(() => {
     }
 
     &__quote-card {
-        padding: 16px 18px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+        padding: 14px 16px;
+        border-radius: 8px;
+        background: var(--bg-secondary);
         border: 1px solid var(--border-color);
     }
 
     &__quote-text {
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.7;
         color: var(--text-primary);
         margin: 0;
     }
 
     &__quote-source {
-        margin-top: 10px;
+        margin-top: 8px;
         color: var(--text-muted);
         font-size: 12px;
     }
@@ -125,15 +125,15 @@ const quoteSource = computed(() => {
     &__users {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 1px;
     }
 
     &__user-card {
         display: flex;
         align-items: center;
-        gap: 14px;
-        padding: 14px 16px;
-        border-radius: 8px;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 6px;
         transition: background 0.15s ease;
 
         &:hover {
@@ -146,6 +146,7 @@ const quoteSource = computed(() => {
         background: var(--bg-tertiary);
         color: var(--text-secondary);
         font-weight: 600;
+        font-size: 14px;
     }
 
     &__user-info {
@@ -153,7 +154,7 @@ const quoteSource = computed(() => {
     }
 
     &__user-name {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         color: var(--text-primary);
     }
@@ -164,7 +165,7 @@ const quoteSource = computed(() => {
     }
 
     &__user-bio {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--text-secondary);
         margin-top: 2px;
         white-space: nowrap;

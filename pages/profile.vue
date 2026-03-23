@@ -5,7 +5,7 @@
             <!-- Avatar preview -->
             <div class="profile__avatar-section">
                 <div class="profile__avatar-wrapper">
-                    <el-avatar :size="80" :src="form.avatarUrl || undefined">
+                    <el-avatar :size="72" :src="form.avatarUrl || undefined">
                         {{ (form.displayName || form.username || '?').charAt(0).toUpperCase() }}
                     </el-avatar>
                 </div>
@@ -95,9 +95,10 @@
             <div v-if="bindings.length" class="profile__bindings">
                 <div v-for="account in bindings" :key="account.id" class="profile__binding-item">
                     <div class="profile__binding-info">
-                        <span class="profile__binding-platform">{{
-                            $t(`binding.platforms.${account.platform}`)
-                        }}</span>
+                        <span class="profile__binding-platform">
+                            <AppPlatformIcon :platform="account.platform" />
+                            <span>{{ $t(`binding.platforms.${account.platform}`) }}</span>
+                        </span>
                         <span class="profile__binding-uid">
                             {{ account.platformUsername || account.platformUid }}
                             <span v-if="account.platformUsername" class="profile__binding-uid-hint">
@@ -119,18 +120,44 @@
             </div>
             <p v-else class="profile__no-bindings">{{ $t('binding.no_accounts') }}</p>
 
-            <el-button size="small" :disabled="luoguLinked" @click="openBindDialog('luogu')">
-                {{ $t('binding.link_account') }} — {{ $t('binding.platforms.luogu') }}
-            </el-button>
-            <el-button size="small" :disabled="codeforcesLinked" @click="handleBindCodeforcesOAuth">
-                {{ $t('binding.link_account') }} — {{ $t('binding.platforms.codeforces') }}
-            </el-button>
-            <el-button size="small" :disabled="githubLinked" @click="handleBindGitHubOAuth">
-                {{ $t('binding.link_account') }} — {{ $t('binding.platforms.github') }}
-            </el-button>
-            <el-button size="small" :disabled="googleLinked" @click="handleBindGoogleOAuth">
-                {{ $t('binding.link_account') }} — {{ $t('binding.platforms.google') }}
-            </el-button>
+            <div class="profile__bind-actions-list">
+                <el-button :disabled="luoguLinked" @click="openBindDialog('luogu')">
+                    <span class="profile__bind-btn-content">
+                        <AppPlatformIcon platform="luogu" />
+                        <span
+                            >{{ $t('binding.link_account') }} —
+                            {{ $t('binding.platforms.luogu') }}</span
+                        >
+                    </span>
+                </el-button>
+                <el-button :disabled="codeforcesLinked" @click="handleBindCodeforcesOAuth">
+                    <span class="profile__bind-btn-content">
+                        <AppPlatformIcon platform="codeforces" />
+                        <span
+                            >{{ $t('binding.link_account') }} —
+                            {{ $t('binding.platforms.codeforces') }}</span
+                        >
+                    </span>
+                </el-button>
+                <el-button :disabled="githubLinked" @click="handleBindGitHubOAuth">
+                    <span class="profile__bind-btn-content">
+                        <AppPlatformIcon platform="github" />
+                        <span
+                            >{{ $t('binding.link_account') }} —
+                            {{ $t('binding.platforms.github') }}</span
+                        >
+                    </span>
+                </el-button>
+                <el-button :disabled="googleLinked" @click="handleBindGoogleOAuth">
+                    <span class="profile__bind-btn-content">
+                        <AppPlatformIcon platform="google" />
+                        <span
+                            >{{ $t('binding.link_account') }} —
+                            {{ $t('binding.platforms.google') }}</span
+                        >
+                    </span>
+                </el-button>
+            </div>
 
             <div v-if="luoguLinked" class="profile__luogu-login">
                 <h3 class="profile__luogu-login-title">{{ $t('binding.luogu_login.title') }}</h3>
@@ -192,7 +219,7 @@
                         platform: $t(`binding.platforms.${bindPlatform}`)
                     })
                 "
-                width="480px"
+                width="440px"
                 :close-on-click-modal="false"
             >
                 <!-- Step 1: Enter UID -->
@@ -689,23 +716,23 @@ function copyLuoguCredential() {
 
 <style scoped lang="scss">
 .profile {
-    max-width: 600px;
+    max-width: 580px;
 
     &__title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         color: var(--text-primary);
     }
 
     &__avatar-section {
         display: flex;
         align-items: center;
-        gap: 20px;
-        margin-bottom: 28px;
-        padding: 20px;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding: 16px;
         background: var(--bg-secondary);
-        border-radius: 12px;
+        border-radius: 8px;
         border: 1px solid var(--border-color);
     }
 
@@ -713,9 +740,8 @@ function copyLuoguCredential() {
         flex-shrink: 0;
 
         :deep(.el-avatar) {
-            border: 3px solid var(--border-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            font-size: 32px;
+            border: 2px solid var(--border-color);
+            font-size: 28px;
         }
     }
 
@@ -727,14 +753,14 @@ function copyLuoguCredential() {
     }
 
     &__avatar-name {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
         color: var(--text-primary);
         line-height: 1.3;
     }
 
     &__avatar-username {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--text-muted);
         line-height: 1.3;
     }
@@ -766,14 +792,14 @@ function copyLuoguCredential() {
     }
 
     &__section-title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
 
     &__setting-row {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
     &__setting-label {
@@ -781,61 +807,64 @@ function copyLuoguCredential() {
         font-size: 13px;
         color: var(--text-secondary);
         font-weight: 500;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     &__bindings {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     &__binding-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 12px 16px;
+        padding: 10px 14px;
         background: var(--bg-secondary);
         border: 1px solid var(--border-color);
-        border-radius: 8px;
-        margin-bottom: 8px;
+        border-radius: 6px;
+        margin-bottom: 6px;
     }
 
     &__binding-info {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 4px;
     }
 
     &__binding-platform {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         font-size: 13px;
         font-weight: 600;
         color: var(--text-primary);
     }
 
     &__binding-uid {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--text-secondary);
     }
 
     &__binding-uid-hint {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--text-muted);
     }
 
     &__no-bindings {
         font-size: 13px;
         color: var(--text-muted);
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     &__bind-desc {
         font-size: 13px;
         color: var(--text-secondary);
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         line-height: 1.6;
     }
 
     &__bind-input {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     &__bind-actions {
@@ -843,22 +872,41 @@ function copyLuoguCredential() {
         justify-content: flex-end;
     }
 
+    &__bind-actions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+
+        .el-button {
+            margin-left: 0;
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    &__bind-btn-content {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
     &__bind-code {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     &__bind-code-label {
         display: block;
         font-size: 12px;
         color: var(--text-muted);
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     &__bind-code-value {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 14px;
+        padding: 8px 12px;
         background: var(--bg-secondary);
         border: 1px solid var(--border-color);
         border-radius: 6px;
@@ -871,7 +919,7 @@ function copyLuoguCredential() {
 
         code {
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: 0.05em;
@@ -881,31 +929,31 @@ function copyLuoguCredential() {
     &__bind-code-hint {
         font-size: 12px;
         color: var(--text-muted);
-        margin-top: 6px;
+        margin-top: 4px;
     }
 
     &__luogu-login {
-        margin-top: 16px;
+        margin-top: 14px;
         padding: 12px;
         border: 1px solid var(--border-color);
-        border-radius: 8px;
+        border-radius: 6px;
         background: var(--bg-secondary);
     }
 
     &__luogu-login-title {
-        margin: 0 0 8px;
+        margin: 0 0 6px;
         font-size: 14px;
         color: var(--text-primary);
     }
 
     &__luogu-login-desc {
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         font-size: 12px;
         color: var(--text-secondary);
     }
 
     &__luogu-login-note {
-        margin: 0 0 8px;
+        margin: 0 0 6px;
         font-size: 12px;
         color: var(--text-muted);
         line-height: 1.5;

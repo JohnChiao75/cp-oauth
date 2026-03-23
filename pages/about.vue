@@ -178,44 +178,44 @@ await renderAll();
     max-width: 720px;
 
     &__title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         color: var(--text-primary);
         letter-spacing: -0.02em;
     }
 
     &__intro {
-        font-size: 15px;
+        font-size: 14px;
         color: var(--text-secondary);
-        margin-bottom: 32px;
+        margin-bottom: 28px;
         line-height: 1.7;
     }
 
     &__card {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         border: 1px solid var(--border-color);
     }
 
     &__card-title {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
         color: var(--text-primary);
     }
 
     &__text {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-secondary);
         line-height: 1.7;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
     &__steps {
-        padding-left: 20px;
-        margin-bottom: 8px;
+        padding-left: 18px;
+        margin-bottom: 4px;
 
         li {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.8;
             padding-left: 4px;
@@ -224,48 +224,48 @@ await renderAll();
 
     &__endpoint {
         h3 {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--text-primary);
             font-family: monospace;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
     }
 
     &__code {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
 
         :deep(pre) {
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             overflow-x: auto;
             margin: 0;
         }
 
         :deep(.shiki) {
-            padding: 16px;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border-radius: 6px;
             overflow-x: auto;
             font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.6;
         }
 
         :deep(code) {
             font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-            font-size: 13px;
+            font-size: 12px;
         }
     }
 
     &__scope-table {
-        margin-top: 8px;
+        margin-top: 4px;
 
         code {
             font-family: monospace;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-primary);
             background: var(--bg-tertiary);
-            padding: 2px 6px;
+            padding: 2px 5px;
             border-radius: 3px;
         }
     }

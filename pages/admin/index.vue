@@ -190,24 +190,24 @@ await loadUsers();
     max-width: 900px;
 
     &__title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         color: var(--text-primary);
     }
 
     &__search {
-        max-width: 320px;
-        margin-bottom: 16px;
+        max-width: 300px;
+        margin-bottom: 14px;
     }
 
     &__table {
         width: 100%;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     &__pagination {
-        margin-top: 16px;
+        margin-top: 14px;
         justify-content: center;
     }
 

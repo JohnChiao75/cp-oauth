@@ -229,13 +229,13 @@ function copyChallengeCode() {
 <style scoped lang="scss">
 .luogu-login-card {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
     border: 1px solid var(--border-color);
 
     &__title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         color: var(--text-primary);
     }
 
@@ -243,15 +243,15 @@ function copyChallengeCode() {
         font-size: 13px;
         color: var(--text-secondary);
         line-height: 1.6;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     &__mode-switch {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     &__mode-tip {
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         font-size: 12px;
         color: var(--text-muted);
         line-height: 1.5;
@@ -268,22 +268,22 @@ function copyChallengeCode() {
     }
 
     &__code {
-        padding: 10px 12px;
+        padding: 8px 12px;
         background: var(--bg-secondary);
         border: 1px solid var(--border-color);
         border-radius: 6px;
         cursor: pointer;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
 
         code {
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-primary);
         }
     }
 
     &__code-hint {
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         font-size: 12px;
         color: var(--text-muted);
     }
@@ -291,11 +291,11 @@ function copyChallengeCode() {
     &__turnstile {
         display: flex;
         justify-content: center;
-        margin: 4px 0 12px;
+        margin: 4px 0 10px;
     }
 
     &__turnstile-hint {
-        margin: -4px 0 12px;
+        margin: -4px 0 10px;
         font-size: 12px;
         color: var(--text-muted);
         line-height: 1.4;

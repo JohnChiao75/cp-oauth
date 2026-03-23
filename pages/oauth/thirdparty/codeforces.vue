@@ -110,13 +110,13 @@ onMounted(() => {
 <style scoped lang="scss">
 .oauth-callback-card {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
     border: 1px solid var(--border-color);
 
     &__title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         color: var(--text-primary);
     }
 
@@ -125,11 +125,12 @@ onMounted(() => {
         align-items: center;
         gap: 8px;
         color: var(--text-muted);
-        margin-bottom: 16px;
+        font-size: 13px;
+        margin-bottom: 14px;
     }
 
     &__back {
-        margin-top: 16px;
+        margin-top: 14px;
         width: 100%;
     }
 }

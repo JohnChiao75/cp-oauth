@@ -37,7 +37,7 @@
             v-model="secretVisible"
             :title="$t('developer.secret_warning')"
             :close-on-click-modal="false"
-            width="480px"
+            width="440px"
         >
             <el-descriptions :column="1" border>
                 <el-descriptions-item label="Client ID">
@@ -62,7 +62,7 @@
             <el-empty
                 v-if="clients.length === 0"
                 :description="$t('developer.no_apps')"
-                :image-size="60"
+                :image-size="48"
             />
             <div v-for="client in clients" :key="client.id" class="developer__client">
                 <div class="developer__client-info">
@@ -172,29 +172,29 @@ await loadClients();
 
 <style scoped lang="scss">
 .developer {
-    max-width: 600px;
+    max-width: 580px;
 
     &__title {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 600;
         margin-bottom: 4px;
         color: var(--text-primary);
     }
 
     &__subtitle {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--text-secondary);
-        margin-bottom: 32px;
+        margin-bottom: 28px;
     }
 
     &__section-title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         color: var(--text-primary);
     }
 
     &__card {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         border: 1px solid var(--border-color);
 
         code {
@@ -208,7 +208,7 @@ await loadClients();
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px 0;
+        padding: 12px 0;
         border-bottom: 1px solid var(--border-color);
 
         &:last-child {
@@ -217,7 +217,7 @@ await loadClients();
     }
 
     &__client-name {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         color: var(--text-primary);
     }
