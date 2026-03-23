@@ -1,7 +1,7 @@
 import prisma from '~/server/utils/prisma';
 
 export default defineEventHandler(async () => {
-    const noticeClient = (prisma as any).notice;
+    const noticeClient = prisma.notice;
     const notices = await noticeClient.findMany({
         orderBy: [{ pinned: 'desc' }, { publishedAt: 'desc' }],
         take: 3,
