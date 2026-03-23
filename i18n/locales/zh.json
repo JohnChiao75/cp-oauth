@@ -34,7 +34,9 @@
             "oauth_divider": "或",
             "with_codeforces": "使用 Codeforces 登录",
             "with_github": "使用 GitHub 登录",
+            "with_google": "使用 Google 登录",
             "with_luogu": "使用洛谷登录",
+            "with_account_password": "使用账号密码登录",
             "luogu_guide_title": "使用洛谷登录",
             "turnstile_required_for_thirdparty": "请先完成人机验证后再使用第三方登录",
             "with_luogu_tip": "支持两种登录方式：挑战模式（推荐）和长期凭证模式。",
@@ -54,6 +56,10 @@
             "github_callback_loading": "正在完成 GitHub 授权...",
             "github_callback_success": "登录成功，正在跳转...",
             "github_callback_invalid": "无效的授权回调参数",
+            "google_callback_title": "Google 登录",
+            "google_callback_loading": "正在完成 Google 授权...",
+            "google_callback_success": "登录成功，正在跳转...",
+            "google_callback_invalid": "无效的授权回调参数",
             "verified": "邮箱验证成功，请登录。",
             "footer": "还没有账号？",
             "register_link": "注册",
@@ -77,6 +83,7 @@
             "loading": "正在创建账号...",
             "with_codeforces": "使用 Codeforces 注册",
             "with_github": "使用 GitHub 注册",
+            "with_google": "使用 Google 注册",
             "with_luogu": "使用洛谷注册",
             "turnstile_required_for_thirdparty": "请先完成人机验证后再使用第三方注册",
             "luogu_step1": "输入你的洛谷 UID，获取验证码。",
@@ -116,7 +123,9 @@
         "not_found": "未找到该用户。",
         "joined": "加入时间",
         "linked_accounts": "关联的竞赛账号",
+        "other_accounts": "其他平台账号",
         "no_linked": "尚未关联任何竞赛编程账号。",
+        "no_other_accounts": "尚未关联其他平台账号。",
         "homepage": "个人主页"
     },
     "binding": {
@@ -146,6 +155,7 @@
         "verify_success": "账号关联成功！",
         "codeforces_bind_success": "Codeforces 账号绑定成功！",
         "github_bind_success": "GitHub 账号绑定成功！",
+        "google_bind_success": "Google 账号绑定成功！",
         "already_linked_platform": "你已经关联了 {platform} 账号",
         "luogu_login": {
             "title": "洛谷剪贴板登录凭证",
@@ -171,7 +181,8 @@
         "platforms": {
             "luogu": "洛谷",
             "codeforces": "Codeforces",
-            "github": "GitHub"
+            "github": "GitHub",
+            "google": "Google"
         }
     },
     "settings": {
@@ -300,6 +311,9 @@
             "github": "GitHub OAuth",
             "github_client_id": "GitHub Client ID",
             "github_client_secret": "GitHub Client Secret",
+            "google": "Google OAuth",
+            "google_client_id": "Google Client ID",
+            "google_client_secret": "Google Client Secret",
             "save": "保存",
             "saving": "保存中...",
             "saved": "配置保存成功。"

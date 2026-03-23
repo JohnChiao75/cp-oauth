@@ -34,7 +34,9 @@
             "oauth_divider": "または",
             "with_codeforces": "Codeforces でログイン",
             "with_github": "GitHub でログイン",
+            "with_google": "Google でログイン",
             "with_luogu": "Luogu でログイン",
+            "with_account_password": "アカウントとパスワードでログイン",
             "luogu_guide_title": "Luogu でログイン",
             "turnstile_required_for_thirdparty": "サードパーティログインを使う前に CAPTCHA 認証を完了してください",
             "with_luogu_tip": "ログイン方式は2種類あります：チャレンジモード（推奨）と長期認証情報モード。",
@@ -54,6 +56,10 @@
             "github_callback_loading": "GitHub 認可を完了しています...",
             "github_callback_success": "ログイン成功、リダイレクトしています...",
             "github_callback_invalid": "認可コールバックのパラメータが無効です",
+            "google_callback_title": "Google ログイン",
+            "google_callback_loading": "Google 認可を完了しています...",
+            "google_callback_success": "ログイン成功、リダイレクトしています...",
+            "google_callback_invalid": "認可コールバックのパラメータが無効です",
             "verified": "メール認証が完了しました。ログインしてください。",
             "footer": "アカウントをお持ちでないですか？",
             "register_link": "登録",
@@ -77,6 +83,7 @@
             "loading": "アカウント作成中...",
             "with_codeforces": "Codeforces で登録",
             "with_github": "GitHub で登録",
+            "with_google": "Google で登録",
             "with_luogu": "Luogu で登録",
             "turnstile_required_for_thirdparty": "サードパーティ登録を使う前に CAPTCHA 認証を完了してください",
             "luogu_step1": "Luogu UID を入力して認証コードを取得してください。",
@@ -116,7 +123,9 @@
         "not_found": "ユーザーが見つかりません。",
         "joined": "登録日",
         "linked_accounts": "連携済みCPアカウント",
+        "other_accounts": "その他プラットフォームアカウント",
         "no_linked": "まだ競技プログラミングのアカウントが連携されていません。",
+        "no_other_accounts": "その他プラットフォームアカウントはまだ連携されていません。",
         "homepage": "ホームページ"
     },
     "binding": {
@@ -146,6 +155,7 @@
         "verify_success": "アカウントを連携しました！",
         "codeforces_bind_success": "Codeforces アカウントを連携しました！",
         "github_bind_success": "GitHub アカウントを連携しました！",
+        "google_bind_success": "Google アカウントを連携しました！",
         "already_linked_platform": "{platform} アカウントは既に連携されています",
         "luogu_login": {
             "title": "Luogu クリップボードログイン認証情報",
@@ -171,7 +181,8 @@
         "platforms": {
             "luogu": "洛谷",
             "codeforces": "Codeforces",
-            "github": "GitHub"
+            "github": "GitHub",
+            "google": "Google"
         }
     },
     "settings": {
@@ -300,6 +311,9 @@
             "github": "GitHub OAuth",
             "github_client_id": "GitHub Client ID",
             "github_client_secret": "GitHub Client Secret",
+            "google": "Google OAuth",
+            "google_client_id": "Google Client ID",
+            "google_client_secret": "Google Client Secret",
             "save": "保存",
             "saving": "保存中...",
             "saved": "設定を保存しました。"

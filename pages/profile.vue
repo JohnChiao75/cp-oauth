@@ -128,6 +128,9 @@
             <el-button size="small" :disabled="githubLinked" @click="handleBindGitHubOAuth">
                 {{ $t('binding.link_account') }} — {{ $t('binding.platforms.github') }}
             </el-button>
+            <el-button size="small" :disabled="googleLinked" @click="handleBindGoogleOAuth">
+                {{ $t('binding.link_account') }} — {{ $t('binding.platforms.google') }}
+            </el-button>
 
             <div v-if="luoguLinked" class="profile__luogu-login">
                 <h3 class="profile__luogu-login-title">{{ $t('binding.luogu_login.title') }}</h3>
@@ -488,6 +491,7 @@ const codeforcesLinked = computed(() =>
     bindings.value.some(account => account.platform === 'codeforces')
 );
 const githubLinked = computed(() => bindings.value.some(account => account.platform === 'github'));
+const googleLinked = computed(() => bindings.value.some(account => account.platform === 'google'));
 
 async function fetchBindings() {
     try {
@@ -588,6 +592,34 @@ async function handleBindGitHubOAuth() {
     try {
         const result = await $fetch<{ authorizationUrl: string }>(
             '/api/auth/thirdparty/github/start',
+            {
+                headers: { Authorization: `Bearer ${token.value}` },
+                query: {
+                    mode: 'bind',
+                    redirect: '/profile'
+                }
+            }
+        );
+        await navigateTo(result.authorizationUrl, { external: true });
+    } catch (e: unknown) {
+        const err = e as { data?: { message?: string } };
+        ElMessage.error(err.data?.message || t('binding.verify_error'));
+    }
+}
+
+async function handleBindGoogleOAuth() {
+    if (googleLinked.value) {
+        ElMessage.warning(
+            t('binding.already_linked_platform', {
+                platform: t('binding.platforms.google')
+            })
+        );
+        return;
+    }
+
+    try {
+        const result = await $fetch<{ authorizationUrl: string }>(
+            '/api/auth/thirdparty/google/start',
             {
                 headers: { Authorization: `Bearer ${token.value}` },
                 query: {

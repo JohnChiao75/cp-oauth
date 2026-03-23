@@ -103,7 +103,7 @@
 
         <p class="luogu-login-card__back">
             <NuxtLink :to="`/login?redirect=${encodeURIComponent(redirectTarget)}`">
-                {{ $t('nav.login') }}
+                {{ $t('auth.login.with_account_password') }}
             </NuxtLink>
         </p>
     </el-card>

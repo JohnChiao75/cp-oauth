@@ -76,6 +76,15 @@
                 <el-input v-model="form.github_client_secret" type="password" show-password />
             </el-form-item>
 
+            <!-- Google OAuth -->
+            <h2 class="admin__section-title">{{ $t('admin.config.google') }}</h2>
+            <el-form-item :label="$t('admin.config.google_client_id')">
+                <el-input v-model="form.google_client_id" />
+            </el-form-item>
+            <el-form-item :label="$t('admin.config.google_client_secret')">
+                <el-input v-model="form.google_client_secret" type="password" show-password />
+            </el-form-item>
+
             <el-form-item>
                 <el-button type="primary" native-type="submit" :loading="saving">
                     {{ saving ? $t('admin.config.saving') : $t('admin.config.save') }}
@@ -110,7 +119,9 @@ const form = reactive({
     codeforces_client_id: '',
     codeforces_client_secret: '',
     github_client_id: '',
-    github_client_secret: ''
+    github_client_secret: '',
+    google_client_id: '',
+    google_client_secret: ''
 });
 
 function handleTabChange(name: string | number) {

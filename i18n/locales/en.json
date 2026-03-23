@@ -34,7 +34,9 @@
             "oauth_divider": "or",
             "with_codeforces": "Sign in with Codeforces",
             "with_github": "Sign in with GitHub",
+            "with_google": "Sign in with Google",
             "with_luogu": "Sign in with Luogu",
+            "with_account_password": "Sign in with email and password",
             "luogu_guide_title": "Sign in with Luogu",
             "turnstile_required_for_thirdparty": "Please complete captcha verification before using third-party sign in",
             "with_luogu_tip": "Two sign-in modes are available: challenge mode (recommended) and long-term credential mode.",
@@ -54,6 +56,10 @@
             "github_callback_loading": "Finishing GitHub authorization...",
             "github_callback_success": "Sign in successful, redirecting...",
             "github_callback_invalid": "Invalid authorization callback parameters",
+            "google_callback_title": "Google Sign In",
+            "google_callback_loading": "Finishing Google authorization...",
+            "google_callback_success": "Sign in successful, redirecting...",
+            "google_callback_invalid": "Invalid authorization callback parameters",
             "verified": "Email verified successfully. Please sign in.",
             "footer": "Don't have an account?",
             "register_link": "Register",
@@ -77,6 +83,7 @@
             "loading": "Creating account...",
             "with_codeforces": "Register with Codeforces",
             "with_github": "Register with GitHub",
+            "with_google": "Register with Google",
             "with_luogu": "Register with Luogu",
             "turnstile_required_for_thirdparty": "Please complete captcha verification before using third-party registration",
             "luogu_step1": "Enter your Luogu UID and get a verification code.",
@@ -116,7 +123,9 @@
         "not_found": "User not found.",
         "joined": "Joined",
         "linked_accounts": "Linked CP Accounts",
+        "other_accounts": "Other Platform Accounts",
         "no_linked": "No competitive programming accounts linked yet.",
+        "no_other_accounts": "No other platform accounts linked yet.",
         "homepage": "Homepage"
     },
     "binding": {
@@ -146,6 +155,7 @@
         "verify_success": "Account linked successfully!",
         "codeforces_bind_success": "Codeforces account linked successfully!",
         "github_bind_success": "GitHub account linked successfully!",
+        "google_bind_success": "Google account linked successfully!",
         "already_linked_platform": "You have already linked a {platform} account",
         "luogu_login": {
             "title": "Luogu Clipboard Login Credential",
@@ -171,7 +181,8 @@
         "platforms": {
             "luogu": "Luogu",
             "codeforces": "Codeforces",
-            "github": "GitHub"
+            "github": "GitHub",
+            "google": "Google"
         }
     },
     "settings": {
@@ -300,6 +311,9 @@
             "github": "GitHub OAuth",
             "github_client_id": "GitHub Client ID",
             "github_client_secret": "GitHub Client Secret",
+            "google": "Google OAuth",
+            "google_client_id": "Google Client ID",
+            "google_client_secret": "Google Client Secret",
             "save": "Save",
             "saving": "Saving...",
             "saved": "Configuration saved successfully."

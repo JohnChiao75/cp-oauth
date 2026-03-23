@@ -8,6 +8,7 @@ export default defineEventHandler(async () => {
     const registrationEnabled = await getConfig('registration_enabled');
     const codeforcesClientId = await getConfig('codeforces_client_id');
     const githubClientId = await getConfig('github_client_id');
+    const googleClientId = await getConfig('google_client_id');
 
     return {
         siteTitle,
@@ -15,6 +16,7 @@ export default defineEventHandler(async () => {
         turnstileEnabled: turnstileEnabled === 'true',
         turnstileSiteKey,
         codeforcesLoginEnabled: codeforcesClientId.trim().length > 0,
-        githubLoginEnabled: githubClientId.trim().length > 0
+        githubLoginEnabled: githubClientId.trim().length > 0,
+        googleLoginEnabled: googleClientId.trim().length > 0
     };
 });

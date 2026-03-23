@@ -72,6 +72,17 @@
                     <span>{{ $t('auth.login.with_github') }}</span>
                 </span>
             </el-button>
+            <el-button
+                v-if="googleLoginEnabled"
+                class="login-card__oauth-btn"
+                :loading="googleLoading"
+                @click="handleGoogleLogin"
+            >
+                <span class="login-card__oauth-btn-content">
+                    <AppPlatformIcon platform="google" />
+                    <span>{{ $t('auth.login.with_google') }}</span>
+                </span>
+            </el-button>
             <el-button class="login-card__oauth-btn" @click="handleLuoguGuideLogin">
                 <span class="login-card__oauth-btn-content">
                     <AppPlatformIcon platform="luogu" />
@@ -102,6 +113,7 @@ const formRef = ref<FormInstance>();
 const loading = ref(false);
 const codeforcesLoading = ref(false);
 const githubLoading = ref(false);
+const googleLoading = ref(false);
 const verified = computed(() => route.query.verified === 'true');
 const redirectTarget = computed(() => getSafeRedirectTarget(route.query.redirect));
 
@@ -111,6 +123,7 @@ interface PublicConfigResponse {
     turnstileSiteKey?: string;
     codeforcesLoginEnabled?: boolean;
     githubLoginEnabled?: boolean;
+    googleLoginEnabled?: boolean;
 }
 
 const form = reactive({
@@ -129,6 +142,7 @@ const turnstileEnabled = computed(() => publicConfig.value?.turnstileEnabled || 
 const turnstileSiteKey = computed(() => publicConfig.value?.turnstileSiteKey || '');
 const codeforcesLoginEnabled = computed(() => publicConfig.value?.codeforcesLoginEnabled || false);
 const githubLoginEnabled = computed(() => publicConfig.value?.githubLoginEnabled || false);
+const googleLoginEnabled = computed(() => publicConfig.value?.googleLoginEnabled || false);
 const { token: turnstileToken, el: turnstileEl } = useTurnstile(turnstileSiteKey);
 
 async function handleLogin() {
@@ -174,6 +188,27 @@ async function handleGitHubLogin() {
         ElMessage.error(err.data?.message || t('auth.login.error'));
     } finally {
         githubLoading.value = false;
+    }
+}
+
+async function handleGoogleLogin() {
+    googleLoading.value = true;
+    try {
+        const result = await $fetch<{ authorizationUrl: string }>(
+            '/api/auth/thirdparty/google/start',
+            {
+                query: {
+                    redirect: redirectTarget.value,
+                    turnstileToken: turnstileToken.value || ''
+                }
+            }
+        );
+        await navigateTo(result.authorizationUrl, { external: true });
+    } catch (e: unknown) {
+        const err = e as { data?: { message?: string } };
+        ElMessage.error(err.data?.message || t('auth.login.error'));
+    } finally {
+        googleLoading.value = false;
     }
 }
 

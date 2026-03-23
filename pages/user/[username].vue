@@ -20,9 +20,9 @@
             <template #header>
                 <span class="user-profile__section-title">{{ $t('user.linked_accounts') }}</span>
             </template>
-            <div v-if="user.linkedAccounts && user.linkedAccounts.length">
+            <div v-if="cpLinkedAccounts.length">
                 <div
-                    v-for="account in user.linkedAccounts"
+                    v-for="account in cpLinkedAccounts"
                     :key="account.platform"
                     class="user-profile__linked-item"
                 >
@@ -35,6 +35,27 @@
                 </div>
             </div>
             <el-empty v-else :description="$t('user.no_linked')" :image-size="60" />
+        </el-card>
+
+        <el-card shadow="never" class="user-profile__section">
+            <template #header>
+                <span class="user-profile__section-title">{{ $t('user.other_accounts') }}</span>
+            </template>
+            <div v-if="otherLinkedAccounts.length">
+                <div
+                    v-for="account in otherLinkedAccounts"
+                    :key="account.platform"
+                    class="user-profile__linked-item"
+                >
+                    <span class="user-profile__linked-platform">{{
+                        $t(`binding.platforms.${account.platform}`)
+                    }}</span>
+                    <span class="user-profile__linked-uid">
+                        {{ account.platformUsername || account.platformUid }}
+                    </span>
+                </div>
+            </div>
+            <el-empty v-else :description="$t('user.no_other_accounts')" :image-size="60" />
         </el-card>
 
         <!-- Homepage (Markdown) -->
@@ -78,6 +99,14 @@ interface UserProfile {
 const { data: user, error } = await useFetch<UserProfile>(`/api/users/${username}`);
 
 const renderedHtml = ref('');
+const cpPlatforms = new Set(['luogu', 'codeforces']);
+
+const cpLinkedAccounts = computed(
+    () => user.value?.linkedAccounts?.filter(account => cpPlatforms.has(account.platform)) || []
+);
+const otherLinkedAccounts = computed(
+    () => user.value?.linkedAccounts?.filter(account => !cpPlatforms.has(account.platform)) || []
+);
 
 const currentTheme = computed(() => (colorMode.value === 'dark' ? 'dark' : 'light'));
 
