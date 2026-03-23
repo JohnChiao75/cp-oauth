@@ -187,6 +187,7 @@
         "refresh_username": "Refresh username",
         "refresh_success": "Username refreshed successfully",
         "refresh_cooldown": "Please wait before refreshing again",
+        "refresh_rebind_required": "Unable to refresh your Codeforces username. Please unbind and bind Codeforces again to update credentials",
         "refresh_error": "Failed to refresh username",
         "platforms": {
             "luogu": "Luogu",

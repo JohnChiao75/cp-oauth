@@ -187,6 +187,7 @@
         "refresh_username": "ユーザー名を更新",
         "refresh_success": "ユーザー名を更新しました",
         "refresh_cooldown": "しばらくしてからもう一度お試しください",
+        "refresh_rebind_required": "Codeforces のユーザー名を更新できません。連携を解除して再連携し、認証情報を更新してください",
         "refresh_error": "ユーザー名の更新に失敗しました",
         "platforms": {
             "luogu": "Luogu",

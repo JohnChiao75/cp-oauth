@@ -89,6 +89,19 @@ async function findOrCreateLocalUser(identity: {
     });
 
     if (linked) {
+        await prisma.linkedAccount.update({
+            where: { id: linked.id },
+            data: {
+                platformUsername: identity.platformUsername,
+                oauthAccessToken: identity.oauthCredentials.oauthAccessToken,
+                oauthRefreshToken: identity.oauthCredentials.oauthRefreshToken,
+                oauthIdToken: identity.oauthCredentials.oauthIdToken,
+                oauthTokenType: identity.oauthCredentials.oauthTokenType,
+                oauthExpiresAt: identity.oauthCredentials.oauthExpiresAt,
+                oauthScope: identity.oauthCredentials.oauthScope
+            }
+        });
+
         return linked.user;
     }
 

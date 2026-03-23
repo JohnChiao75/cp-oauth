@@ -553,13 +553,18 @@ async function handleRefreshUsername(account: LinkedAccount) {
         });
         const idx = bindings.value.findIndex(b => b.id === account.id);
         if (idx !== -1) {
-            bindings.value[idx].platformUsername = result.platformUsername;
+            const target = bindings.value[idx];
+            if (target) {
+                target.platformUsername = result.platformUsername;
+            }
         }
         ElMessage.success(t('binding.refresh_success'));
     } catch (e: unknown) {
         const err = e as { statusCode?: number; data?: { message?: string } };
         if (err.statusCode === 429) {
             ElMessage.warning(err.data?.message || t('binding.refresh_cooldown'));
+        } else if (err.statusCode === 409) {
+            ElMessage.warning(err.data?.message || t('binding.refresh_rebind_required'));
         } else {
             ElMessage.error(err.data?.message || t('binding.refresh_error'));
         }

@@ -187,6 +187,7 @@
         "refresh_username": "刷新用户名",
         "refresh_success": "用户名刷新成功",
         "refresh_cooldown": "请稍后再刷新",
+        "refresh_rebind_required": "无法刷新 Codeforces 用户名，请先解绑再重新绑定以更新授权信息",
         "refresh_error": "刷新用户名失败",
         "platforms": {
             "luogu": "洛谷",

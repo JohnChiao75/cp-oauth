@@ -66,6 +66,14 @@ export default defineEventHandler(async event => {
     });
 
     if (!newUsername) {
+        if (platform === 'codeforces') {
+            throw createError({
+                statusCode: 409,
+                message:
+                    'Unable to refresh Codeforces username. Please unbind and bind Codeforces again to update OAuth credentials.'
+            });
+        }
+
         throw createError({
             statusCode: 502,
             message: 'Failed to fetch username from platform'

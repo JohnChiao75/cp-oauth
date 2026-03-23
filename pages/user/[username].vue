@@ -181,6 +181,8 @@ async function handleRefreshUsername(account: {
         const err = e as { statusCode?: number; data?: { message?: string } };
         if (err.statusCode === 429) {
             ElMessage.warning(err.data?.message || t('binding.refresh_cooldown'));
+        } else if (err.statusCode === 409) {
+            ElMessage.warning(err.data?.message || t('binding.refresh_rebind_required'));
         } else {
             ElMessage.error(err.data?.message || t('binding.refresh_error'));
         }
