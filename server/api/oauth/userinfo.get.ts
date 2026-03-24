@@ -12,6 +12,8 @@ interface OAuthPayload {
     type: string;
 }
 
+const LINK_SCOPE_PLATFORMS = ['luogu', 'atcoder', 'codeforces', 'github', 'google'] as const;
+
 export default defineEventHandler(async event => {
     const auth = getHeader(event, 'authorization');
     if (!auth?.startsWith('Bearer ')) {
@@ -52,6 +54,9 @@ export default defineEventHandler(async event => {
 
     const scopes = payload.scopes as ScopeName[];
     const response: Record<string, unknown> = {};
+    const grantedLinkPlatforms = LINK_SCOPE_PLATFORMS.filter(platform =>
+        scopes.includes(`link:${platform}` as ScopeName)
+    );
 
     // openid — always include sub
     if (scopes.includes('openid')) {
@@ -73,9 +78,18 @@ export default defineEventHandler(async event => {
     }
 
     // cp:linked — linked platform accounts
-    if (scopes.includes('cp:linked')) {
+    if (scopes.includes('cp:linked') || grantedLinkPlatforms.length > 0) {
         const linked = await prisma.linkedAccount.findMany({
-            where: { userId: user.id },
+            where: {
+                userId: user.id,
+                ...(scopes.includes('cp:linked')
+                    ? {}
+                    : {
+                          platform: {
+                              in: grantedLinkPlatforms
+                          }
+                      })
+            },
             select: {
                 platform: true,
                 platformUid: true,
@@ -83,6 +97,11 @@ export default defineEventHandler(async event => {
             }
         });
         response.linked_accounts = linked;
+    }
+
+    // link:{platform} — expose which per-platform link scopes are granted
+    if (grantedLinkPlatforms.length > 0) {
+        response.link_scopes = grantedLinkPlatforms.map(platform => `link:${platform}`);
     }
 
     // cp:summary — placeholder for aggregated CP stats

@@ -299,6 +299,11 @@
             "profile": "プロフィール — ユーザー名、アバター、自己紹介",
             "email": "メール — あなたのメールアドレス",
             "cp_linked": "連携アカウント — 連携済みの競技プログラミングプラットフォームアカウント",
+            "link_luogu": "連携権限 — Luogu アカウントを連携可能",
+            "link_atcoder": "連携権限 — AtCoder アカウントを連携可能",
+            "link_codeforces": "連携権限 — Codeforces アカウントを連携可能",
+            "link_github": "連携権限 — GitHub アカウントを連携可能",
+            "link_google": "連携権限 — Google アカウントを連携可能",
             "cp_summary": "CP概要 — 競技プログラミング統計の集計データ",
             "cp_details": "CP詳細 — 完全な提出履歴とレーティング推移"
         }
@@ -347,8 +352,13 @@
             "profile": "ユーザー名、表示名、アバターURL、自己紹介",
             "email": "メールアドレスと認証ステータス",
             "cp_linked": "連携済みの競技プログラミングプラットフォームアカウント（プラットフォーム、UID、ユーザー名）",
-            "cp_summary": "連携されたOJアカウント、解いた問題数の合計、最高レーティング",
-            "cp_details": "完全な提出履歴とレーティング推移データ"
+            "link_luogu": "Luogu アカウントの連携を許可",
+            "link_atcoder": "AtCoder アカウントの連携を許可",
+            "link_codeforces": "Codeforces アカウントの連携を許可",
+            "link_github": "GitHub アカウントの連携を許可",
+            "link_google": "Google アカウントの連携を許可",
+            "cp_summary": "連携されたOJアカウント、解いた問題数の合計、最高レーティング（未完成。現在はプレースホルダーデータを返します）",
+            "cp_details": "完全な提出履歴とレーティング推移データ（未完成。現在はプレースホルダーデータを返します）"
         },
         "pkce": {
             "title": "PKCE（Proof Key for Code Exchange）",

@@ -5,6 +5,11 @@ export const SCOPES = {
     profile: 'Username, avatar, and bio',
     email: 'Email address',
     'cp:linked': 'Linked competitive programming accounts',
+    'link:luogu': 'Link permission for Luogu account',
+    'link:atcoder': 'Link permission for AtCoder account',
+    'link:codeforces': 'Link permission for Codeforces account',
+    'link:github': 'Link permission for GitHub account',
+    'link:google': 'Link permission for Google account',
     'cp:summary': 'Aggregated competitive programming stats',
     'cp:details': 'Full submission history and rating trends'
 } as const;

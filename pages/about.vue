@@ -86,6 +86,13 @@ const currentTheme = computed(() => (colorMode.value === 'dark' ? 'dark' : 'ligh
 const scopeData = computed(() => [
     { scope: 'openid', data: t('about.scopes.openid') },
     { scope: 'profile', data: t('about.scopes.profile') },
+    { scope: 'email', data: t('about.scopes.email') },
+    { scope: 'cp:linked', data: t('about.scopes.cp_linked') },
+    { scope: 'link:luogu', data: t('about.scopes.link_luogu') },
+    { scope: 'link:atcoder', data: t('about.scopes.link_atcoder') },
+    { scope: 'link:codeforces', data: t('about.scopes.link_codeforces') },
+    { scope: 'link:github', data: t('about.scopes.link_github') },
+    { scope: 'link:google', data: t('about.scopes.link_google') },
     { scope: 'cp:summary', data: t('about.scopes.cp_summary') },
     { scope: 'cp:details', data: t('about.scopes.cp_details') }
 ]);
