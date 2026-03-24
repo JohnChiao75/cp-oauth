@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <h1 class="home__title">{{ $t('home.title') }}</h1>
+        <h1 class="home__title">{{ homeTitle }}</h1>
         <p class="home__subtitle">{{ $t('home.subtitle') }}</p>
 
         <section class="home__section">
@@ -90,9 +90,32 @@ interface PublicConfigResponse {
     recentUsersCount?: number;
 }
 
+interface MeSummary {
+    username: string;
+}
+
 const DEFAULT_RECENT_USERS_LIMIT = 6;
 
 const { data: publicConfig } = await useFetch<PublicConfigResponse>('/api/public/config');
+const token = useCookie('auth_token');
+const me = ref<MeSummary | null>(null);
+
+if (token.value) {
+    try {
+        me.value = await $fetch<MeSummary>('/api/auth/me', {
+            headers: { Authorization: `Bearer ${token.value}` }
+        });
+    } catch {
+        me.value = null;
+    }
+}
+
+const homeTitle = computed(() => {
+    if (me.value?.username) {
+        return t('home.welcome_user', { username: me.value.username });
+    }
+    return t('home.title');
+});
 
 const recentUsersLimit = computed(() => {
     const raw = publicConfig.value?.recentUsersCount;

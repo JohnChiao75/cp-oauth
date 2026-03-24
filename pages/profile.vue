@@ -1101,7 +1101,7 @@ interface LinkedAccount {
 
 const bindings = ref<LinkedAccount[]>([]);
 const refreshingPlatform = ref('');
-const refreshablePlatforms = new Set(['luogu', 'codeforces']);
+const refreshablePlatforms = new Set(['luogu', 'codeforces', 'github']);
 
 function canRefresh(platform: string): boolean {
     return refreshablePlatforms.has(platform);
@@ -1127,7 +1127,11 @@ async function handleRefreshUsername(account: LinkedAccount) {
         if (err.statusCode === 429) {
             ElMessage.warning(err.data?.message || t('binding.refresh_cooldown'));
         } else if (err.statusCode === 409) {
-            ElMessage.warning(err.data?.message || t('binding.refresh_rebind_required'));
+            if (account.platform === 'github') {
+                ElMessage.warning(err.data?.message || t('binding.refresh_token_missing'));
+            } else {
+                ElMessage.warning(err.data?.message || t('binding.refresh_rebind_required'));
+            }
         } else {
             ElMessage.error(err.data?.message || t('binding.refresh_error'));
         }

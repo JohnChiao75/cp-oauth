@@ -187,6 +187,20 @@
     box-shadow: -1px 0 0 0 var(--el-color-primary);
 }
 
+/* Radio button: keep first segment border visible */
+.el-radio-group .el-radio-button:first-child .el-radio-button__inner {
+    border-left: 1px solid var(--el-border-color);
+}
+
+.dark
+    .el-radio-group
+    .el-radio-button:first-child
+    .el-radio-button__original-radio:checked
+    + .el-radio-button__inner {
+    border-left-color: var(--el-color-primary);
+    box-shadow: none;
+}
+
 /* Pagination */
 .el-pagination {
     --el-pagination-bg-color: transparent;

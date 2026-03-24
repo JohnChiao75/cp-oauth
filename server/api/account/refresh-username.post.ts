@@ -66,11 +66,26 @@ export default defineEventHandler(async event => {
     });
 
     if (!newUsername) {
+        if (platform === 'github' && !account.oauthAccessToken) {
+            throw createError({
+                statusCode: 409,
+                message:
+                    'Unable to refresh GitHub username because no GitHub access token has been saved. Please sign in with GitHub again to sync credentials.'
+            });
+        }
+
         if (platform === 'codeforces') {
             throw createError({
                 statusCode: 409,
                 message:
                     'Unable to refresh Codeforces username. Please unbind and bind Codeforces again to update OAuth credentials.'
+            });
+        }
+
+        if (platform === 'github') {
+            throw createError({
+                statusCode: 502,
+                message: 'Failed to refresh GitHub username from GitHub API'
             });
         }
 

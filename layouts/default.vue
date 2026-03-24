@@ -5,6 +5,8 @@
         <AppSidebar
             :is-logged-in="isLoggedIn"
             :is-admin="isAdmin"
+            :username="sidebarUsername"
+            :avatar-url="sidebarAvatarUrl"
             :open="sidebarOpen"
             @logout="handleLogout"
             @navigate="sidebarOpen = false"
@@ -27,26 +29,37 @@ import { Menu } from 'lucide-vue-next';
 const token = useCookie('auth_token');
 const isLoggedIn = computed(() => !!token.value);
 const userRole = ref('');
+const sidebarUsername = ref('');
+const sidebarAvatarUrl = ref('');
 const sidebarOpen = ref(false);
 
-async function fetchRole() {
+async function fetchCurrentUser() {
     if (!token.value) {
         userRole.value = '';
+        sidebarUsername.value = '';
+        sidebarAvatarUrl.value = '';
         return;
     }
     try {
-        const data = await $fetch<{ role: string }>('/api/auth/me', {
-            headers: { Authorization: `Bearer ${token.value}` }
-        });
+        const data = await $fetch<{ role: string; username: string; avatarUrl: string | null }>(
+            '/api/auth/me',
+            {
+                headers: { Authorization: `Bearer ${token.value}` }
+            }
+        );
         userRole.value = data.role;
+        sidebarUsername.value = data.username;
+        sidebarAvatarUrl.value = data.avatarUrl || '';
     } catch {
         userRole.value = '';
+        sidebarUsername.value = '';
+        sidebarAvatarUrl.value = '';
     }
 }
 
 const isAdmin = computed(() => userRole.value === 'admin');
 
-watch(token, () => fetchRole(), { immediate: true });
+watch(token, () => fetchCurrentUser(), { immediate: true });
 
 const route = useRoute();
 watch(
@@ -59,6 +72,8 @@ watch(
 function handleLogout() {
     token.value = null;
     userRole.value = '';
+    sidebarUsername.value = '';
+    sidebarAvatarUrl.value = '';
     sidebarOpen.value = false;
     navigateTo('/login');
 }

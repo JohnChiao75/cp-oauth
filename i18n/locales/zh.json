@@ -15,10 +15,12 @@
         "about": "文档",
         "login": "登录",
         "logout": "退出登录",
-        "admin": "管理"
+        "admin": "管理",
+        "signed_in_as": "已登录用户"
     },
     "home": {
         "title": "欢迎",
+        "welcome_user": "欢迎，{username}。",
         "subtitle": "算法竞赛统一身份认证平台",
         "announcements": "站点公告",
         "pinned": "置顶",
@@ -258,6 +260,7 @@
         "refresh_success": "用户名刷新成功",
         "refresh_cooldown": "请稍后再刷新",
         "refresh_rebind_required": "无法刷新 Codeforces 用户名，请先解绑再重新绑定以更新授权信息",
+        "refresh_token_missing": "未保存过 GitHub 访问令牌，请先使用 GitHub 登录一次以同步授权信息",
         "refresh_error": "刷新用户名失败",
         "platforms": {
             "luogu": "洛谷",

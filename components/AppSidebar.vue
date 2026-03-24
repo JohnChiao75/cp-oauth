@@ -23,6 +23,15 @@
             </el-menu-item>
         </el-menu>
         <div class="app-sidebar__footer">
+            <div v-if="isLoggedIn" class="app-sidebar__user">
+                <el-avatar :size="34" :src="avatarUrl || undefined" class="app-sidebar__avatar">
+                    {{ (username || 'U').charAt(0).toUpperCase() }}
+                </el-avatar>
+                <div class="app-sidebar__user-text">
+                    <p class="app-sidebar__user-label">{{ $t('nav.signed_in_as') }}</p>
+                    <p class="app-sidebar__user-name">{{ username }}</p>
+                </div>
+            </div>
             <el-menu
                 :default-active="activeRoute"
                 router
@@ -51,7 +60,13 @@
 <script setup lang="ts">
 import { Home, LogOut, LogIn, Code, BookOpen, UserCircle, Shield } from 'lucide-vue-next';
 
-defineProps<{ isLoggedIn: boolean; isAdmin: boolean; open: boolean }>();
+defineProps<{
+    isLoggedIn: boolean;
+    isAdmin: boolean;
+    open: boolean;
+    username: string;
+    avatarUrl: string;
+}>();
 const emit = defineEmits<{ logout: []; navigate: [] }>();
 
 const route = useRoute();
@@ -143,6 +158,46 @@ function handleNav() {
         .app-sidebar__menu {
             flex: unset;
         }
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 12px 10px;
+        padding: 8px;
+        border-radius: 8px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+        background: var(--bg-primary);
+        color: var(--text-secondary);
+        font-weight: 600;
+    }
+
+    &__user-text {
+        min-width: 0;
+    }
+
+    &__user-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    &__user-name {
+        margin: 2px 0 0;
+        font-size: 13px;
+        color: var(--text-primary);
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
     }
 
     &__logout {

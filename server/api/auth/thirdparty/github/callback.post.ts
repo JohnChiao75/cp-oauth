@@ -9,6 +9,13 @@ import {
     resolveGitHubIdentity
 } from '~/server/utils/github-oauth';
 import { getUniqueUsername } from '~/server/utils/codeforces-oauth';
+import { fetchPlatformUsername } from '~/server/utils/platform-username';
+
+interface GitHubTokenPayload {
+    accessToken: string;
+    tokenType?: string;
+    scope?: string;
+}
 
 interface CallbackBody {
     code?: string;
@@ -31,14 +38,17 @@ async function allocateSyntheticEmail(platformUid: string): Promise<string> {
     throw createError({ statusCode: 500, message: 'Unable to allocate email for GitHub user' });
 }
 
-async function findOrCreateLocalUser(identity: {
-    platformUid: string;
-    platformUsername: string;
-    email: string | null;
-    emailVerified: boolean;
-    displayName: string | null;
-    avatarUrl: string | null;
-}) {
+async function findOrCreateLocalUser(
+    identity: {
+        platformUid: string;
+        platformUsername: string;
+        email: string | null;
+        emailVerified: boolean;
+        displayName: string | null;
+        avatarUrl: string | null;
+    },
+    token: GitHubTokenPayload
+) {
     const linked = await prisma.linkedAccount.findUnique({
         where: {
             platform_platformUid: {
@@ -87,27 +97,36 @@ async function findOrCreateLocalUser(identity: {
         },
         update: {
             platformUid: identity.platformUid,
-            platformUsername: identity.platformUsername
+            platformUsername: identity.platformUsername,
+            oauthAccessToken: token.accessToken,
+            oauthTokenType: token.tokenType || 'bearer',
+            oauthScope: token.scope || null
         },
         create: {
             userId: user.id,
             platform: 'github',
             platformUid: identity.platformUid,
-            platformUsername: identity.platformUsername
+            platformUsername: identity.platformUsername,
+            oauthAccessToken: token.accessToken,
+            oauthTokenType: token.tokenType || 'bearer',
+            oauthScope: token.scope || null
         }
     });
 
     return user;
 }
 
-async function registerLocalUserFromGitHub(identity: {
-    platformUid: string;
-    platformUsername: string;
-    email: string | null;
-    emailVerified: boolean;
-    displayName: string | null;
-    avatarUrl: string | null;
-}) {
+async function registerLocalUserFromGitHub(
+    identity: {
+        platformUid: string;
+        platformUsername: string;
+        email: string | null;
+        emailVerified: boolean;
+        displayName: string | null;
+        avatarUrl: string | null;
+    },
+    token: GitHubTokenPayload
+) {
     const linked = await prisma.linkedAccount.findUnique({
         where: {
             platform_platformUid: {
@@ -160,7 +179,10 @@ async function registerLocalUserFromGitHub(identity: {
             userId: user.id,
             platform: 'github',
             platformUid: identity.platformUid,
-            platformUsername: identity.platformUsername
+            platformUsername: identity.platformUsername,
+            oauthAccessToken: token.accessToken,
+            oauthTokenType: token.tokenType || 'bearer',
+            oauthScope: token.scope || null
         }
     });
 
@@ -171,6 +193,7 @@ async function bindGitHubToExistingUser(params: {
     userId: string;
     platformUid: string;
     platformUsername: string;
+    token: GitHubTokenPayload;
 }) {
     const targetUser = await prisma.user.findUnique({
         where: { id: params.userId },
@@ -216,13 +239,19 @@ async function bindGitHubToExistingUser(params: {
         },
         update: {
             platformUid: params.platformUid,
-            platformUsername: params.platformUsername
+            platformUsername: params.platformUsername,
+            oauthAccessToken: params.token.accessToken,
+            oauthTokenType: params.token.tokenType || 'bearer',
+            oauthScope: params.token.scope || null
         },
         create: {
             userId: params.userId,
             platform: 'github',
             platformUid: params.platformUid,
-            platformUsername: params.platformUsername
+            platformUsername: params.platformUsername,
+            oauthAccessToken: params.token.accessToken,
+            oauthTokenType: params.token.tokenType || 'bearer',
+            oauthScope: params.token.scope || null
         }
     });
 
@@ -272,6 +301,11 @@ export default defineEventHandler(async event => {
         redirectUri
     });
     const identity = await resolveGitHubIdentity(token.access_token);
+    const githubToken: GitHubTokenPayload = {
+        accessToken: token.access_token,
+        tokenType: token.token_type,
+        scope: token.scope
+    };
 
     if (mode === 'bind') {
         const bindUserId = statePayload.bindUserId;
@@ -282,8 +316,29 @@ export default defineEventHandler(async event => {
         const user = await bindGitHubToExistingUser({
             userId: bindUserId,
             platformUid: identity.platformUid,
-            platformUsername: identity.platformUsername
+            platformUsername: identity.platformUsername,
+            token: githubToken
         });
+
+        // Keep GitHub username fresh as soon as the account is linked.
+        const refreshedUsername = await fetchPlatformUsername('github', {
+            platformUid: identity.platformUid,
+            oauthAccessToken: githubToken.accessToken,
+            oauthTokenType: githubToken.tokenType || null
+        });
+        if (refreshedUsername) {
+            await prisma.linkedAccount.update({
+                where: {
+                    userId_platform: {
+                        userId: bindUserId,
+                        platform: 'github'
+                    }
+                },
+                data: {
+                    platformUsername: refreshedUsername
+                }
+            });
+        }
 
         return {
             mode: 'bind',
@@ -297,7 +352,25 @@ export default defineEventHandler(async event => {
     }
 
     if (mode === 'register') {
-        const user = await registerLocalUserFromGitHub(identity);
+        const user = await registerLocalUserFromGitHub(identity, githubToken);
+        const refreshedUsername = await fetchPlatformUsername('github', {
+            platformUid: identity.platformUid,
+            oauthAccessToken: githubToken.accessToken,
+            oauthTokenType: githubToken.tokenType || null
+        });
+        if (refreshedUsername) {
+            await prisma.linkedAccount.update({
+                where: {
+                    userId_platform: {
+                        userId: user.id,
+                        platform: 'github'
+                    }
+                },
+                data: {
+                    platformUsername: refreshedUsername
+                }
+            });
+        }
         const config = useRuntimeConfig();
         const authToken = jwt.sign({ userId: user.id }, config.jwtSecret, { expiresIn: '7d' });
 
@@ -313,7 +386,25 @@ export default defineEventHandler(async event => {
         };
     }
 
-    const user = await findOrCreateLocalUser(identity);
+    const user = await findOrCreateLocalUser(identity, githubToken);
+    const refreshedUsername = await fetchPlatformUsername('github', {
+        platformUid: identity.platformUid,
+        oauthAccessToken: githubToken.accessToken,
+        oauthTokenType: githubToken.tokenType || null
+    });
+    if (refreshedUsername) {
+        await prisma.linkedAccount.update({
+            where: {
+                userId_platform: {
+                    userId: user.id,
+                    platform: 'github'
+                }
+            },
+            data: {
+                platformUsername: refreshedUsername
+            }
+        });
+    }
     const config = useRuntimeConfig();
     const authToken = jwt.sign({ userId: user.id }, config.jwtSecret, { expiresIn: '7d' });
 

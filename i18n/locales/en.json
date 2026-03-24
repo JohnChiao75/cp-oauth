@@ -15,10 +15,12 @@
         "about": "Docs",
         "login": "Login",
         "logout": "Logout",
-        "admin": "Admin"
+        "admin": "Admin",
+        "signed_in_as": "Signed in as"
     },
     "home": {
         "title": "Welcome",
+        "welcome_user": "Welcome, {username}.",
         "subtitle": "Algorithm Competition Unified Identity Platform",
         "announcements": "Announcements",
         "pinned": "Pinned",
@@ -258,6 +260,7 @@
         "refresh_success": "Username refreshed successfully",
         "refresh_cooldown": "Please wait before refreshing again",
         "refresh_rebind_required": "Unable to refresh your Codeforces username. Please unbind and bind Codeforces again to update credentials",
+        "refresh_token_missing": "No GitHub access token has been saved yet. Please sign in with GitHub once to sync credentials",
         "refresh_error": "Failed to refresh username",
         "platforms": {
             "luogu": "Luogu",

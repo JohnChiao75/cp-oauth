@@ -1,5 +1,6 @@
 import { consola } from 'consola';
 import { getCodeforcesDiscoveryMetadata, resolveCodeforcesIdentity } from './codeforces-oauth';
+import { resolveGitHubIdentity } from './github-oauth';
 
 const logger = consola.withTag('platform-username');
 const LUOGU_USER_AGENT = 'Mozilla/5.0 (compatible; CPOAuth/1.0)';
@@ -86,9 +87,27 @@ async function fetchCodeforcesUsername(context: RefreshUsernameContext): Promise
     }
 }
 
+async function fetchGithubUsername(context: RefreshUsernameContext): Promise<string | null> {
+    const platformUid = context.platformUid;
+    if (!context.oauthAccessToken) {
+        logger.warn(`Missing GitHub access token for uid=${platformUid}`);
+        return null;
+    }
+
+    try {
+        const identity = await resolveGitHubIdentity(context.oauthAccessToken);
+        return identity.platformUsername || null;
+    } catch (e: unknown) {
+        const err = e as { message?: string };
+        logger.warn(`Failed to fetch GitHub username for uid=${platformUid}: ${err.message}`);
+        return null;
+    }
+}
+
 const fetchers: Record<string, UsernameFetcher> = {
     luogu: fetchLuoguUsername,
-    codeforces: fetchCodeforcesUsername
+    codeforces: fetchCodeforcesUsername,
+    github: fetchGithubUsername
 };
 
 export function canRefreshUsername(platform: string): boolean {

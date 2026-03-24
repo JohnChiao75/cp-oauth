@@ -15,10 +15,12 @@
         "about": "ドキュメント",
         "login": "ログイン",
         "logout": "ログアウト",
-        "admin": "管理"
+        "admin": "管理",
+        "signed_in_as": "ログイン中"
     },
     "home": {
         "title": "ようこそ",
+        "welcome_user": "ようこそ、{username}さん。",
         "subtitle": "アルゴリズム競技向け統合認証プラットフォーム",
         "announcements": "お知らせ",
         "pinned": "固定",
@@ -257,6 +259,7 @@
         "refresh_success": "ユーザー名を更新しました",
         "refresh_cooldown": "しばらくしてからもう一度お試しください",
         "refresh_rebind_required": "Codeforces のユーザー名を更新できません。連携を解除して再連携し、認証情報を更新してください",
+        "refresh_token_missing": "GitHub のアクセストークンがまだ保存されていません。認証情報を同期するために、GitHub で一度ログインしてください",
         "refresh_error": "ユーザー名の更新に失敗しました",
         "platforms": {
             "luogu": "Luogu",
