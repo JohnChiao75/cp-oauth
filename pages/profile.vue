@@ -468,7 +468,7 @@
                                 {{ $t('profile.security.add_passkey') }}
                             </el-button>
                         </div>
-                        <div v-if="passkeys.length" class="profile__bindings">
+                        <div v-if="passkeys.length" class="profile__bindings profile__passkey-list">
                             <div
                                 v-for="item in passkeys"
                                 :key="item.id"
@@ -1538,6 +1538,10 @@ function copyLuoguCredential() {
 
     &__bindings {
         margin-bottom: 14px;
+    }
+
+    &__passkey-list {
+        margin-top: 12px;
     }
 
     &__visibility-panel {
