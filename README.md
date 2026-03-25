@@ -74,14 +74,21 @@ const data = await userinfo.json()
 
 ## 权限范围（Scope）
 
-请仅请求您的应用实际需要的范围。响应的用户数据会根据授予的 `scope` 动态过滤。
+请仅请求您的应用实际需要的范围。`/oauth/userinfo` 的响应会根据授予的 `scope` 动态过滤。
 
 | Scope | 说明 |
 |-------|------|
 | `openid` | 必需，获取用户的唯一标识符（`sub`）。 |
 | `profile` | 获取用户的基础信息，如 `username`、`display_name`、`avatar_url`、`bio`。 |
-| `cp_summary` | 获取竞赛编程概要数据。 |
-| `cp_details` | 获取更详细的竞赛编程数据。 |
+| `email` | 获取邮箱地址及验证状态。 |
+| `cp:linked` | 获取所有关联的竞赛编程平台账号（包含平台名称、UID、用户名）。 |
+| `link:luogu` | 读取关联的洛谷账号信息（UID、用户名）。 |
+| `link:atcoder` | 读取关联的 AtCoder 账号信息（UID、用户名）。 |
+| `link:codeforces` | 读取关联的 Codeforces 账号信息（UID、用户名）。 |
+| `link:github` | 读取关联的 GitHub 账号信息（UID、用户名）。 |
+| `link:google` | 读取关联的 Google 账号信息（UID、用户名）。 |
+| `cp_summary` | 获取竞赛编程概要数据，如关联的 OJ 账号、解题总数、最高评级（未完成，当前返回占位数据）。 |
+| `cp_details` | 获取详细的竞赛编程数据，包含完整的提交记录和评级趋势（未完成，当前返回占位数据）。 |
 
 ## PKCE 使用示例（适用于公开客户端）
 
